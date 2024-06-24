@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name" translatable="false">CrossPrices</string>
+    <string name="_0_00" translatable="false">0,00</string>
+    <string name="menu_a" translatable="false">Menu A</string>
+    <string name="description">Find the best prices for your menu</string>
+    <string name="solo_a">Solo A</string>
+    <string name="solo_b">Solo B</string>
+    <string name="menu_b" translatable="false">Menu B</string>
+    <string name="best_combo">Best Combo :</string>
+    <string name="menu_b_solo_a">Menu B + Solo A</string>
+    <string name="menu_a_solo_b">Menu A + Solo B</string>
+    <string name="no_combo">No Combo</string>
+    <string name="clear_menu_a">Clear Menu A</string>
+    <string name="clear_solo_a">Clear Solo A</string>
+    <string name="clear_menu_b">Clear Menu B</string>
+    <string name="clear_solo_b">Clear Solo B</string>
+    <string name="clear_all">Clear All</string>
+</resources>

@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CrossPrices" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/primary</item>
+
+    </style>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#660000</color>
+    <color name="green">#FF006600</color>
+    <color name="blue">#FF000066</color>
+    <color name="yellow">#FF666600</color>
+    <color name="cyan">#FF006666</color>
+    <color name="magenta">#FF660066</color>
+
+    <color name="primary">#999999</color>
+
+    <color name="warning">#FFFF0000</color>
+    <color name="back">@color/black</color>
+
+</resources>

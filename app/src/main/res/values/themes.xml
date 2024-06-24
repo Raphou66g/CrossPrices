@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CrossPrices" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary</item>
+    </style>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
+    <color name="green">#FF00FF00</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="cyan">#FF00FFFF</color>
+    <color name="magenta">#FFFF00FF</color>
+
+    <color name="primary">#999999</color>
+
+    <color name="warning">#FFFF0000</color>
+    <color name="back">@color/white</color>
+
+
+    <style name="Theme.CrossPrices" parent="Base.Theme.CrossPrices" />
+</resources>

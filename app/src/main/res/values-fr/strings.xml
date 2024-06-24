@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="description">Trouvez les meilleures prix pour votre menu</string>
+    <string name="solo_a">Seul A</string>
+    <string name="solo_b">Seul B</string>
+    <string name="best_combo">Meilleur choix :</string>
+    <string name="menu_b_solo_a">Menu B + Seul A</string>
+    <string name="menu_a_solo_b">Menu A + Seul B</string>
+    <string name="no_combo">Pas de meilleur combinaison</string>
+</resources>
