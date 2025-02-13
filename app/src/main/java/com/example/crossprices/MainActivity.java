@@ -1,8 +1,13 @@
 package com.example.crossprices;
 
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,18 +19,25 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     ConstraintLayout MenuA, MenuB, SoloA, SoloB;
+    TextInputLayout MenuAInputLayout, MenuBInputLayout, SoloAInputLayout, SoloBInputLayout;
+    List<TextInputLayout> textInputs;
     EditText menuA, menuB, soloA, soloB;
     List<EditText> editTexts;
+    HashMap<EditText, TextInputLayout> textInputLayouts;
     float menuAPrice, menuBPrice, soloAPrice, soloBPrice;
     List<Float> floats;
-    Button clearMenuA, clearMenuB, clearSoloA, clearSoloB, clearAll;
-    TextView combo;
+    Button clearAll;
+    TextView menuASoloB, menuBSoloA, difference;
 
     private void defineVars() {
         //ConstraintLayout
@@ -34,18 +46,24 @@ public class MainActivity extends AppCompatActivity {
         SoloA = findViewById(R.id.SoloA);
         SoloB = findViewById(R.id.SoloB);
 
+        //TextInputLayout
+        MenuAInputLayout = findViewById(R.id.MenuAInputLayout);
+        MenuBInputLayout = findViewById(R.id.MenuBInputLayout);
+        SoloAInputLayout = findViewById(R.id.SoloAInputLayout);
+        SoloBInputLayout = findViewById(R.id.SoloBInputLayout);
+
         //EditText
         menuA = findViewById(R.id.MenuAPrice);
         menuB = findViewById(R.id.MenuBPrice);
         soloA = findViewById(R.id.SoloAPrice);
         soloB = findViewById(R.id.SoloBPrice);
-        combo = findViewById(R.id.Combo);
+
+        //TextView
+        menuASoloB = findViewById(R.id.MenuASoloB);
+        menuBSoloA = findViewById(R.id.MenuBSoloA);
+        difference = findViewById(R.id.Difference);
 
         //Button
-        clearMenuA = findViewById(R.id.clearMenuA);
-        clearMenuB = findViewById(R.id.clearMenuB);
-        clearSoloA = findViewById(R.id.clearSoloA);
-        clearSoloB = findViewById(R.id.clearSoloB);
         clearAll = findViewById(R.id.clearAll);
         buttonActions();
 
@@ -55,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
         editTexts.add(menuB);
         editTexts.add(soloA);
         editTexts.add(soloB);
+        textInputs = new ArrayList<>();
+        textInputs.add(MenuAInputLayout);
+        textInputs.add(MenuBInputLayout);
+        textInputs.add(SoloAInputLayout);
+        textInputs.add(SoloBInputLayout);
 
         //Float
         floats = new ArrayList<>();
@@ -63,32 +86,21 @@ public class MainActivity extends AppCompatActivity {
         floats.add(soloAPrice);
         floats.add(soloBPrice);
 
+        //HashMap
+        textInputLayouts = new HashMap<>();
+        textInputLayouts.put(menuA, MenuAInputLayout);
+        textInputLayouts.put(menuB, MenuBInputLayout);
+        textInputLayouts.put(soloA, SoloAInputLayout);
+        textInputLayouts.put(soloB, SoloBInputLayout);
+
     }
 
     private void buttonActions() {
-        clearMenuA.setOnClickListener(v -> {
-            menuA.setText("");
-            displayCombo();
-        });
-        clearMenuB.setOnClickListener(v -> {
-            menuB.setText("");
-            displayCombo();
-            });
-        clearSoloA.setOnClickListener(v -> {
-            soloA.setText("");
-            displayCombo();
-        });
-        clearSoloB.setOnClickListener(v -> {
-            soloB.setText("");
-            displayCombo();
-        });
         clearAll.setOnClickListener(v -> {
             menuA.setText("");
             menuB.setText("");
             soloA.setText("");
             soloB.setText("");
-            displayCombo();
-            combo.setText("");
         });
     }
 
@@ -124,11 +136,23 @@ public class MainActivity extends AppCompatActivity {
 
     private String calculate() {
         zeroed();
-        if (menuAPrice + soloBPrice > menuBPrice + soloAPrice) {
+        float mAsB = menuAPrice + soloBPrice;
+        float mBsA = menuBPrice + soloAPrice;
+        float dif = Math.abs(mAsB - mBsA);
+
+        String AB = String.format("%s = %.2f", getText(R.string.menu_a_solo_b), mAsB);
+        String BA = String.format("%s = %.2f", getText(R.string.menu_b_solo_a), mBsA);
+        String diff = String.format("%s %.2f", getText(R.string.difference), dif);
+
+        menuASoloB.setText(AB);
+        menuBSoloA.setText(BA);
+        difference.setText(diff);
+
+        if (mAsB > mBsA) {
             return "BA";
-        } else if (menuAPrice + soloBPrice < menuBPrice + soloAPrice) {
+        } else if (mAsB < mBsA) {
             return "AB";
-        } else if (menuAPrice + soloBPrice == menuBPrice + soloAPrice && notZero()) {
+        } else if (mAsB == mBsA && notZero()) {
             return "C";
         } else {
             return "N";
@@ -139,32 +163,40 @@ public class MainActivity extends AppCompatActivity {
         String comboResult = calculate();
         switch (comboResult) {
             case "BA":
-                combo.setText(R.string.menu_b_solo_a);
+                menuBSoloA.setTextColor(getResources().getColor(R.color.green, null));
+                menuASoloB.setTextColor(getResources().getColor(R.color.red, null));
+                difference.setTextColor(getResources().getColor(R.color.green, null));
                 MenuB.setBackgroundColor(getResources().getColor(R.color.green, null));
                 SoloA.setBackgroundColor(getResources().getColor(R.color.green, null));
                 MenuA.setBackgroundColor(getResources().getColor(R.color.red, null));
                 SoloB.setBackgroundColor(getResources().getColor(R.color.red, null));
                 break;
             case "AB":
-                combo.setText(R.string.menu_a_solo_b);
+                menuBSoloA.setTextColor(getResources().getColor(R.color.red, null));
+                menuASoloB.setTextColor(getResources().getColor(R.color.green, null));
+                difference.setTextColor(getResources().getColor(R.color.green, null));
                 MenuA.setBackgroundColor(getResources().getColor(R.color.green, null));
                 SoloB.setBackgroundColor(getResources().getColor(R.color.green, null));
                 MenuB.setBackgroundColor(getResources().getColor(R.color.red, null));
                 SoloA.setBackgroundColor(getResources().getColor(R.color.red, null));
                 break;
             case "C":
-                combo.setText(R.string.no_combo);
+                menuBSoloA.setTextColor(getResources().getColor(R.color.cyan, null));
+                menuASoloB.setTextColor(getResources().getColor(R.color.cyan, null));
+                difference.setTextColor(getResources().getColor(R.color.cyan, null));
                 MenuA.setBackgroundColor(getResources().getColor(R.color.cyan, null));
                 MenuB.setBackgroundColor(getResources().getColor(R.color.cyan, null));
                 SoloA.setBackgroundColor(getResources().getColor(R.color.cyan, null));
                 SoloB.setBackgroundColor(getResources().getColor(R.color.cyan, null));
                 break;
             default:
-                combo.setText("");
-                MenuA.setBackgroundColor(getResources().getColor(R.color.back, null));
-                MenuB.setBackgroundColor(getResources().getColor(R.color.back, null));
-                SoloA.setBackgroundColor(getResources().getColor(R.color.back, null));
-                SoloB.setBackgroundColor(getResources().getColor(R.color.back, null));
+                menuBSoloA.setTextColor(getResources().getColor(R.color.textColor, null));
+                menuASoloB.setTextColor(getResources().getColor(R.color.textColor, null));
+                difference.setTextColor(getResources().getColor(R.color.textColor, null));
+                MenuA.setBackground(null);
+                MenuB.setBackground(null);
+                SoloA.setBackground(null);
+                SoloB.setBackground(null);
                 break;
         }
     }
@@ -175,6 +207,13 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         defineVars();
+
+        textInputs.forEach(textInputLayout -> {
+            textInputLayout.setEndIconVisible(true);
+            textInputLayout.setEndIconOnClickListener(v -> {
+                Objects.requireNonNull(textInputLayout.getEditText()).setText("");
+            });
+        });
 
         editTexts.forEach(editText -> editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -199,6 +238,23 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
 }

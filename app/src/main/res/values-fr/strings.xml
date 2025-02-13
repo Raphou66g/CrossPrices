@@ -7,4 +7,6 @@
     <string name="menu_b_solo_a">Menu B + Seul A</string>
     <string name="menu_a_solo_b">Menu A + Seul B</string>
     <string name="no_combo">Pas de meilleur combinaison</string>
+    <string name="clear_all">Tout effacer</string>
+    <string name="difference">Différence :</string>
 </resources>

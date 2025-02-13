@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".MainActivity">
@@ -20,13 +20,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/MenuA"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -41,24 +41,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/MenuAPrice"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/MenuAInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Menu A Price"
-                android:ems="6"
-                android:gravity="center"
-                android:hint="@string/_0_00"
-                android:inputType="numberDecimal"
-                android:textSize="20sp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/MenuAText" />
+                app:layout_constraintTop_toBottomOf="@id/MenuAText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/MenuAPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:hint="@string/_0_00"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/SoloA"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -73,31 +80,39 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/SoloAPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autofillHints="Solo A Price"
-                android:ems="6"
-                android:gravity="center"
-                android:hint="@string/_0_00"
-                android:inputType="numberDecimal"
-                android:textSize="20sp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/SoloAInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SoloAText" />
+                app:layout_constraintTop_toBottomOf="@+id/SoloAText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/SoloAPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:hint="@string/_0_00"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/MenuB"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -112,24 +127,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/MenuBPrice"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/MenuBInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Menu B Price"
-                android:ems="6"
-                android:gravity="center"
-                android:hint="@string/_0_00"
-                android:inputType="numberDecimal"
-                android:textSize="20sp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/MenuBText" />
+                app:layout_constraintTop_toBottomOf="@+id/MenuBText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/MenuBPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:hint="@string/_0_00"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/SoloB"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -144,84 +166,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/SoloBPrice"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/SoloBInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Solo B Price"
-                android:ems="6"
-                android:gravity="center"
-                android:hint="@string/_0_00"
-                android:inputType="numberDecimal"
-                android:textSize="20sp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SoloBText" />
+                app:layout_constraintTop_toBottomOf="@+id/SoloBText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/SoloBPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:hint="@string/_0_00"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/ComboText"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/best_combo"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/Combo"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="20sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/clearMenuA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/warning"
-            android:text="@string/clear_menu_a" />
-
-        <Button
-            android:id="@+id/clearSoloA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/warning"
-            android:text="@string/clear_solo_a" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/clearMenuB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/warning"
-            android:text="@string/clear_menu_b" />
-
-        <Button
-            android:id="@+id/clearSoloB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/warning"
-            android:text="@string/clear_solo_b" />
     </LinearLayout>
 
     <Button
@@ -229,6 +195,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="@string/clear_all"
         android:textColor="@color/warning"
-        android:text="@string/clear_all" />
+        android:layout_marginVertical="5dp"/>
+
+    <TextView
+        android:id="@+id/MenuASoloB"
+        android:layout_marginVertical="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/menu_a_solo_b"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/MenuBSoloA"
+        android:layout_marginVertical="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/menu_b_solo_a"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/Difference"
+        android:layout_marginVertical="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/difference"
+        android:textSize="20sp"/>
+
 </LinearLayout>
